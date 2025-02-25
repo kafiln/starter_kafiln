@@ -1,14 +1,13 @@
 import {
   Calendar,
   ChevronDown,
-  ChevronUp,
   Home,
   Inbox,
   Search,
   Settings,
-  User2,
 } from "lucide-react";
 
+import { NavUser } from "@/components/nav-user";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -102,32 +101,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <User2 /> Username
-                  <ChevronUp className="ml-auto" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                side="top"
-                className="w-[--radix-popper-anchor-width]"
-              >
-                <DropdownMenuItem>
-                  <span>Account</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Billing</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Sign out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
