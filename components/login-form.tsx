@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -50,11 +51,12 @@ export function LoginForm({
           Login with GitHub
         </Button>
       </div>
+
       <div className="text-center text-sm">
-        Don&apos;t have an account?{" "}
-        <a href="#" className="underline underline-offset-4">
-          Sign up
-        </a>
+        Don&apos;t have an account?
+        <Button asChild variant={"link"}>
+          <Link href="/sign-up">Sign up</Link>
+        </Button>
       </div>
     </form>
   );
