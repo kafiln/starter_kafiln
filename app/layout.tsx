@@ -1,5 +1,6 @@
+import AppHeaderBar from "@/components/app-header-bar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -33,9 +34,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SidebarProvider>
             <AppSidebar />
-            <main className="flex min-h-screen">
-              <SidebarTrigger />
-              {children}
+            <main className="flex flex-1 flex-col min-h-screen">
+              <AppHeaderBar />
+              <div className="flex-1">{children}</div>
             </main>
           </SidebarProvider>
         </ThemeProvider>

@@ -9,7 +9,6 @@ import {
   User2,
 } from "lucide-react";
 
-import { ThemeToggle } from "@/components/theme-switch";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -103,11 +102,6 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <ThemeToggle />
-          </SidebarMenuItem>
-        </SidebarMenu>
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
