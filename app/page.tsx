@@ -1,5 +1,6 @@
 import FeatureCard from "@/components/feature-card";
 import ScrollButton from "@/components/scroll-button";
+import { ThemeToggle } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BarChart, Cpu, Database, Zap } from "lucide-react";
@@ -16,6 +17,7 @@ export default function RAGLandingPage() {
           <ScrollButton name="Features" id="features" />
           <ScrollButton name="How It Works" id="how-it-works" />
           <ScrollButton name="Benefits" id="benefits" />
+          <ThemeToggle />
         </nav>
       </header>
       <main className="flex-1">
