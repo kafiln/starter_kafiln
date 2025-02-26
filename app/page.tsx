@@ -1,9 +1,9 @@
 import FeatureCard from "@/components/feature-card";
+import ScrollButton from "@/components/scroll-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BarChart, Cpu, Database, Zap } from "lucide-react";
 import Link from "next/link";
-
 export default function RAGLandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -13,24 +13,9 @@ export default function RAGLandingPage() {
           <span className="ml-2 text-2xl font-bold">RAGSolution</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#features"
-          >
-            Features
-          </Link>
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#how-it-works"
-          >
-            How It Works
-          </Link>
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#benefits"
-          >
-            Benefits
-          </Link>
+          <ScrollButton name="Features" id="features" />
+          <ScrollButton name="How It Works" id="how-it-works" />
+          <ScrollButton name="Benefits" id="benefits" />
         </nav>
       </header>
       <main className="flex-1">
