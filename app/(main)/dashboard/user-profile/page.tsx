@@ -24,7 +24,6 @@ const DashboardPage = () => {
 
 const fetchExampleData = async () => {
   const response = await fetch("https://randomuser.me/api/");
-  console.log(response);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

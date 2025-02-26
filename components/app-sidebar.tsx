@@ -42,11 +42,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  // get current url
   const pathname = usePathname();
-  console.log(pathname);
+  const { user } = useUser();
 
   return (
     <Sidebar {...props}>
@@ -85,7 +85,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser />
+        <NavUser
+          user={{
+            name: user?.fullName || "",
+            email: user?.emailAddresses[0].emailAddress || "",
+            avatar: user?.imageUrl || "",
+          }}
+        />
       </SidebarFooter>
     </Sidebar>
   );
