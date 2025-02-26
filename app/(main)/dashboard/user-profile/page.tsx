@@ -14,7 +14,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col gap-8 p-2">
-      <div className="">
+      <div className="flex justify-end">
         <Button onClick={() => refetch()}>New user</Button>
       </div>
       {data && data.results[0] && <UserProfileCard user={data.results[0]} />}
