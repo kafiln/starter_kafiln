@@ -22,7 +22,7 @@ export default function SignupPage() {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <img
-          src="https://placehold.co/600x400/000000/FFFFFF/png"
+          src="https://plus.unsplash.com/premium_photo-1736777746284-57ad30a9473b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxOZjhVVFJqUnlZOHx8ZW58MHx8fHx8"
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />

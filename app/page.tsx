@@ -1,5 +1,5 @@
-import FeatureCard from "@/components/feature-card";
-import ScrollButton from "@/components/scroll-button";
+import FeatureCard from "@/components/templates/feature-card";
+import ScrollButton from "@/components/templates/scroll-button";
 import { ThemeToggle } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
