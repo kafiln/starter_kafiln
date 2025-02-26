@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { SignupForm } from "@/components/signup-form";
+import { SignUp } from "@clerk/nextjs";
 import { GalleryVerticalEnd } from "lucide-react";
 
 export default function SignupPage() {
@@ -16,7 +16,7 @@ export default function SignupPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <SignupForm />
+            <SignUp routing="hash" />
           </div>
         </div>
       </div>

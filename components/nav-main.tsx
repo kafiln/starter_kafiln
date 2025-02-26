@@ -13,6 +13,7 @@ export interface NavItem {
   url: string;
   icon: LucideIcon;
   isActive?: boolean;
+  badge?: string;
 }
 
 interface NavMainProps {

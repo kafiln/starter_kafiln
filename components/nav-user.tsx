@@ -25,6 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@clerk/nextjs";
 
 interface NavUserProps {
   name: string;
@@ -41,6 +42,11 @@ export function NavUser({
   user?: NavUserProps;
 }) {
   const { isMobile } = useSidebar();
+  const auth = useAuth();
+
+  const logout = () => {
+    auth.signOut();
+  };
 
   return (
     <SidebarMenu>
@@ -103,7 +109,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

@@ -1,5 +1,6 @@
-import { LoginForm } from "@/components/login-form";
+import { SignIn } from "@clerk/nextjs";
 import { GalleryVerticalEnd } from "lucide-react";
+
 import Image from "next/image";
 
 export default function LoginPage() {
@@ -16,7 +17,8 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <LoginForm />
+            {/* // add clerk sign in form */}
+            <SignIn routing="hash" />
           </div>
         </div>
       </div>
