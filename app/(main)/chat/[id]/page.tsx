@@ -1,11 +1,25 @@
 "use client";
 import LoadingSpinner from "@/components/loading-spinner";
-import Message from "@/components/modules/chat/message";
+import { MessageList } from "@/components/ui/message-list";
 import { CONVERSATIONS, MESSAGES } from "@/constants/queryKeys";
 import { getConversationByid } from "@/lib/api/conversations";
 import { fetchMessages } from "@/lib/api/messages";
+import { Message as MessageInput } from "@/lib/api/types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+
+export const mapInternalMessagesToMessages = (
+  messages: MessageInput[]
+): { id: string; role: string; content: string; createdAt: Date }[] => {
+  return messages.map((message) => {
+    return {
+      id: message.id,
+      role: message.is_user_message ? "user" : "assistant",
+      content: message.content,
+      createdAt: new Date(message.created_at),
+    };
+  });
+};
 
 export default function ChatPage() {
   const { id } = useParams<{ id: string }>();
@@ -29,16 +43,14 @@ export default function ChatPage() {
           <h2 className="text-2xl font-bold tracking-tight">
             {conversation?.name}
           </h2>
-          {messages && messages.length > 0 && (
-            <div className="flex flex-col items-center space-y-4">
-              <span className="text-sm text-gray-500">
-                {messages.length} messages
-              </span>
-              {messages.map((message) => (
-                <Message key={message.id} message={message} />
-              ))}
-            </div>
-          )}
+          <div className="py-4">
+            {messages && messages.length > 0 && (
+              <MessageList
+                messages={mapInternalMessagesToMessages(messages)}
+                isTyping={false}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

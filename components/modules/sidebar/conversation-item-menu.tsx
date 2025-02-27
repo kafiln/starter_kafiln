@@ -32,26 +32,26 @@ const ConversationItemMenu = ({
         </SidebarMenuAction>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-56 rounded-lg"
+        className="w-56 rounded-lg "
         side={isMobile ? "bottom" : "right"}
         align={isMobile ? "end" : "start"}
       >
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           <Pencil className="text-muted-foreground" />
           <span>Rename</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           <LinkIcon className="text-muted-foreground" />
           <span>Copy Link</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           <ArrowUpRight className="text-muted-foreground" />
           <span>Open in New Tab</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="text-destructive"
+          className="text-destructive cursor-pointer"
           onClick={() => onDeleteConversation()}
         >
           <Trash2 />
