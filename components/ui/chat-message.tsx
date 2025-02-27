@@ -132,7 +132,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
       <div className={cn(chatBubbleVariants({ isUser, animation }), className)}>
         <div>
-          <MarkdownRenderer content={content} />
+          <MarkdownRenderer>{content}</MarkdownRenderer>
         </div>
 
         {role === "assistant" && actions ? (
