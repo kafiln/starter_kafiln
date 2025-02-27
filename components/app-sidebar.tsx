@@ -49,7 +49,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           pathname={pathname}
           title="Folders"
         />
-
         <ConversationsList
           title="Conversations"
           conversations={standaloneConversations || []}

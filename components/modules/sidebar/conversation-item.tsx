@@ -1,3 +1,4 @@
+import ConversationItemMenu from "@/components/modules/sidebar/conversation-item-menu";
 import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { Conversation } from "@/lib/api/types";
 
@@ -13,12 +14,13 @@ export function ConversationItem({
   pathname,
 }: ConversationItemProps) {
   const url = `/dashboard/chat/${conversation.id}`;
-  // const isMobile = useIsMobile();
+
   return (
     <SidebarMenuItem key={conversation.id}>
       <SidebarMenuButton asChild isActive={pathname === url}>
         <Link href={url}>{conversation.name}</Link>
       </SidebarMenuButton>
+      <ConversationItemMenu />
     </SidebarMenuItem>
   );
 }
