@@ -13,7 +13,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Folder as FolderIcon } from "lucide-react";
 import { useState } from "react";
 import { ConversationsList } from "./conversations-list";
 
@@ -56,11 +56,11 @@ export function FoldersList({
             >
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton
-                    tooltip={folder.name}
-                    className="w-full flex justify-between"
-                  >
-                    <span>{folder.name}</span>
+                  <SidebarMenuButton tooltip={folder.name}>
+                    <div className="flex items-center">
+                      <FolderIcon size={16} className="mr-2" />
+                      <span>{folder.name}</span>
+                    </div>
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
