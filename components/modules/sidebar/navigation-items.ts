@@ -1,20 +1,15 @@
 import { NavItem } from "@/components/nav-main";
-import { Home, Sparkles, User } from "lucide-react";
+import { Home, User } from "lucide-react";
 
 export const navigationItems: NavItem[] = [
   {
     title: "Home",
-    url: "/dashboard",
+    url: "/chat/",
     icon: Home,
   },
   {
     title: "Profile",
-    url: "/dashboard/user-profile",
+    url: "/chat/user-profile",
     icon: User,
-  },
-  {
-    title: "Ask AI",
-    url: "/dashboard/chat",
-    icon: Sparkles,
   },
 ];

@@ -15,7 +15,7 @@ export function ConversationItem({
   pathname,
   onDeleteConversation,
 }: ConversationItemProps) {
-  const url = `/dashboard/chat/${conversation.id}`;
+  const url = `/chat/${conversation.id}`;
 
   return (
     <SidebarMenuItem key={conversation.id}>

@@ -22,6 +22,7 @@ interface NavMainProps {
 }
 
 export function NavMain({ items }: NavMainProps) {
+  
   return (
     <SidebarMenu>
       {items.map((item) => (
