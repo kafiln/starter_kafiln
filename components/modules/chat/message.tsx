@@ -5,8 +5,16 @@ interface MessageProps {
 }
 
 const Message = ({ message }: MessageProps) => {
-  const isBold = message.is_user_message ? "font-bold" : "";
-  return <div className={`${isBold}`}>{message.content}</div>;
+  const isUser = message.is_user_message;
+  return (
+    <div
+      className={`${
+        isUser ? "bg-primary self-end text-white" : "self-start bg-gray-100"
+      } p-4 my-2 rounded-xl`}
+    >
+      {message.content}
+    </div>
+  );
 };
 
 export default Message;
