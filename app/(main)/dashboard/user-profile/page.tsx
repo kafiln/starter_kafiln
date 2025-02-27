@@ -1,15 +1,16 @@
 "use client";
+import LoadingSpinner from "@/components/loading-spinner";
 import { Button } from "@/components/ui/button";
 import UserProfileCard from "@/components/user-profile";
 import { useQuery } from "@tanstack/react-query";
 
 const DashboardPage = () => {
-  const { data, error, isLoading, refetch } = useQuery({
+  const { data, error, isFetching, refetch } = useQuery({
     queryKey: ["exampleData"],
     queryFn: fetchExampleData,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isFetching) return <LoadingSpinner />;
   if (error) return <div>Error: {error.message}</div>;
 
   return (

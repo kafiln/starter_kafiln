@@ -15,7 +15,7 @@ const items: NavItem[] = [
   },
   {
     title: "Ask AI",
-    url: "#",
+    url: "/dashboard/chat",
     icon: Sparkles,
   },
   {
