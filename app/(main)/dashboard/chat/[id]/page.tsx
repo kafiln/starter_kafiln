@@ -1,5 +1,6 @@
 "use client";
 import LoadingSpinner from "@/components/loading-spinner";
+import Message from "@/components/modules/chat/message";
 import { CONVERSATIONS, MESSAGES } from "@/constants/queryKeys";
 import { getConversationByid } from "@/lib/api/conversations";
 import { fetchMessages } from "@/lib/api/messages";
@@ -34,9 +35,7 @@ export default function ChatPage() {
                 {messages.length} messages
               </span>
               {messages.map((message) => (
-                <div key={message.id}>
-                  <p>{message.content}</p>
-                </div>
+                <Message key={message.id} message={message} />
               ))}
             </div>
           )}
