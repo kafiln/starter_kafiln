@@ -1,5 +1,5 @@
 "use client";
-import { Home, Inbox, Sparkles, User } from "lucide-react";
+import { ChevronRight, Home, Sparkles, User } from "lucide-react";
 import * as React from "react";
 
 const items: NavItem[] = [
@@ -18,12 +18,6 @@ const items: NavItem[] = [
     url: "/dashboard/chat",
     icon: Sparkles,
   },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-    badge: "10",
-  },
 ];
 
 import { Logo } from "@/components/logo";
@@ -41,11 +35,17 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
 } from "@/components/ui/sidebar";
 import { CONVERSATIONS, FOLDERS } from "@/constants/queryKeys";
 import { fetchAllConversations } from "@/lib/api/conversations";
 import { fetchFolders } from "@/lib/api/folders";
 import { useUser } from "@clerk/nextjs";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@radix-ui/react-collapsible";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -71,7 +71,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          {/* <SidebarGroupLabel>Favorites</SidebarGroupLabel> */}
           <SidebarGroupContent>
             <NavMain
               items={items.map((item) => ({
@@ -82,33 +81,69 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
         {folders && folders.length > 0 && (
-          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroup>
             <SidebarGroupLabel>Folders</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {folders.map((folder) => (
-                  <SidebarMenuItem key={folder.id}>
-                    <SidebarMenuButton>{folder.name}</SidebarMenuButton>
-                  </SidebarMenuItem>
+                  <Collapsible
+                    key={folder.id}
+                    asChild
+                    defaultOpen={false}
+                    className="group/collapsible"
+                  >
+                    <SidebarMenuItem>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton tooltip={folder.name}>
+                          {/* {item.icon && <item.icon />} */}
+                          <span>{folder.name}</span>
+                          <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {conversations
+                            ?.filter(
+                              (conversations) =>
+                                conversations.folder_id === folder.id
+                            )
+                            ?.map((conversation) => {
+                              const url = `/dashboard/chat/${conversation.id}`;
+                              return (
+                                <SidebarMenuItem key={conversation.id}>
+                                  <SidebarMenuButton
+                                    asChild
+                                    isActive={pathname === url}
+                                  >
+                                    <Link href={url}>{conversation.name}</Link>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              );
+                            })}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </SidebarMenuItem>
+                  </Collapsible>
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         )}
         {conversations && conversations.length > 0 && (
-          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroup>
             <SidebarGroupLabel>Conversations</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {conversations.map((conversation) => (
-                  <SidebarMenuItem key={conversation.id}>
-                    <SidebarMenuButton>
-                      <Link href={`/dashboard/chat/${conversation.id}`}>
-                        {conversation.name}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {conversations.map((conversation) => {
+                  const url = `/dashboard/chat/${conversation.id}`;
+                  return (
+                    <SidebarMenuItem key={conversation.id}>
+                      <SidebarMenuButton asChild isActive={pathname === url}>
+                        <Link href={url}>{conversation.name}</Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
