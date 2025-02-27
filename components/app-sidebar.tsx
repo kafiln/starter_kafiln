@@ -23,7 +23,13 @@ import { useSidebarData } from "@/lib/hooks/use-sidebar-data";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const { user } = useUser();
-  const { conversations, standaloneConversations, folders } = useSidebarData();
+  const {
+    conversations,
+    standaloneConversations,
+    folders,
+    addNewConversation,
+    addNewFolder,
+  } = useSidebarData();
 
   return (
     <Sidebar {...props}>
@@ -48,11 +54,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           conversations={conversations}
           pathname={pathname}
           title="Folders"
+          onCreateFolder={addNewFolder}
         />
         <ConversationsList
           title="Conversations"
           conversations={standaloneConversations || []}
           pathname={pathname}
+          onCreateConversation={addNewConversation}
         />
       </SidebarContent>
       <SidebarFooter>

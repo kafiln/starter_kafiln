@@ -13,7 +13,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
-import { ChevronRight, Folder as FolderIcon } from "lucide-react";
+import { ChevronRight, Folder as FolderIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { ConversationsList } from "./conversations-list";
 
@@ -22,6 +22,7 @@ interface FoldersListProps {
   conversations: Conversation[] | undefined;
   pathname: string;
   title?: string;
+  onCreateFolder: () => void;
 }
 
 export function FoldersList({
@@ -29,6 +30,9 @@ export function FoldersList({
   conversations,
   pathname,
   title,
+  onCreateFolder = () => {
+    console.log("create folder");
+  },
 }: FoldersListProps) {
   // State to track which folder is currently open
   const [openFolderId, setOpenFolderId] = useState<string | null>(null);
@@ -42,7 +46,18 @@ export function FoldersList({
 
   return (
     <SidebarGroup>
-      {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
+      {title && (
+        <SidebarGroupLabel>
+          <div className="flex justify-between w-full">
+            <h1 className="text-base font-semibold text-black">{title}</h1>
+            <PlusIcon
+              className="cursor-pointer"
+              onClick={onCreateFolder}
+              size={16}
+            />
+          </div>
+        </SidebarGroupLabel>
+      )}
       <SidebarGroupContent>
         <SidebarMenu>
           {folders.map((folder) => (

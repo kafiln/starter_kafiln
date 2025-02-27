@@ -5,24 +5,40 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import { Conversation } from "@/lib/api/types";
+import { PlusIcon } from "lucide-react";
 import { ConversationItem } from "./conversation-item";
 
 interface ConversationsListProps {
   conversations?: Conversation[];
   pathname: string;
   title?: string;
+  onCreateConversation?: () => void;
 }
 
 export function ConversationsList({
   conversations,
   pathname,
   title,
+  onCreateConversation = () => {
+    console.log("create conversation");
+  },
 }: ConversationsListProps) {
   if (!conversations || conversations.length === 0) return null;
 
   return (
     <SidebarGroup>
-      {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
+      {title && (
+        <SidebarGroupLabel>
+          <div className="flex justify-between w-full">
+            <h1 className="text-base font-semibold text-black">{title}</h1>
+            <PlusIcon
+              className="cursor-pointer"
+              onClick={onCreateConversation}
+              size={16}
+            />
+          </div>
+        </SidebarGroupLabel>
+      )}
       <SidebarGroupContent>
         <SidebarMenu>
           {conversations.map((conversation) => (

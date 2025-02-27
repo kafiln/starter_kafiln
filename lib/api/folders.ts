@@ -8,7 +8,7 @@ export const fetchFolders = async (): Promise<Folder[]> => {
 
 export const createFolder = async (folderData: {
   name: string;
-  color?: string;
+  color: string;
 }): Promise<Folder> => {
   const response = await axiosInstance.post("/folders/", folderData);
   return response.data;
