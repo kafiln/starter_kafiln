@@ -11,6 +11,12 @@ export const fetchConversations = async (
   return response.data;
 };
 
+export const fetchAllConversations = async (): Promise<Conversation[]> => {
+  const url = "/conversations/";
+  const response = await axiosInstance.get(url);
+  return response.data;
+};
+
 export const createConversation = async (conversationData: {
   name: string;
   folder_id?: string | null;
@@ -30,6 +36,13 @@ export const updateConversation = async (
     `/conversations/${conversationId}`,
     conversationData
   );
+  return response.data;
+};
+
+export const getConversationByid = async (
+  conversationId: string
+): Promise<Conversation> => {
+  const response = await axiosInstance.get(`/conversations/${conversationId}`);
   return response.data;
 };
 export const unassignConversationFolder = async (

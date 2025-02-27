@@ -42,11 +42,26 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { CONVERSATIONS, FOLDERS } from "@/constants/queryKeys";
+import { fetchAllConversations } from "@/lib/api/conversations";
+import { fetchFolders } from "@/lib/api/folders";
 import { useUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const { user } = useUser();
+
+  const { data: conversations } = useQuery({
+    queryKey: [CONVERSATIONS],
+    queryFn: fetchAllConversations,
+  });
+
+  const { data: folders } = useQuery({
+    queryKey: [FOLDERS],
+    queryFn: fetchFolders,
+  });
 
   return (
     <Sidebar {...props}>
@@ -66,23 +81,38 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             />
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel>Folders</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <a href="#">Tourba</a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <a href="#">SP2M</a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {folders && folders.length > 0 && (
+          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+            <SidebarGroupLabel>Folders</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {folders.map((folder) => (
+                  <SidebarMenuItem key={folder.id}>
+                    <SidebarMenuButton>{folder.name}</SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
+        {conversations && conversations.length > 0 && (
+          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+            <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {conversations.map((conversation) => (
+                  <SidebarMenuItem key={conversation.id}>
+                    <SidebarMenuButton>
+                      <Link href={`/dashboard/chat/${conversation.id}`}>
+                        {conversation.name}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <SidebarFooter>
         <NavUser
