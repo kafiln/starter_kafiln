@@ -9,7 +9,6 @@ import { FoldersList } from "@/components/modules/sidebar/folders-list";
 import { navigationItems } from "@/components/modules/sidebar/navigation-items";
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
-import { SearchForm } from "@/components/search-form";
 import {
   Sidebar,
   SidebarContent,
@@ -29,14 +28,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     folders,
     addNewConversation,
     addNewFolder,
-    removeConversation
+    removeConversation,
   } = useSidebarData();
 
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <Logo />
-        <SearchForm />
+        {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
