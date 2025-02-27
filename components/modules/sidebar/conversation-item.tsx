@@ -7,11 +7,13 @@ import Link from "next/link";
 interface ConversationItemProps {
   conversation: Conversation;
   pathname: string;
+  onDeleteConversation: (id: string) => void;
 }
 
 export function ConversationItem({
   conversation,
   pathname,
+  onDeleteConversation,
 }: ConversationItemProps) {
   const url = `/dashboard/chat/${conversation.id}`;
 
@@ -20,7 +22,9 @@ export function ConversationItem({
       <SidebarMenuButton asChild isActive={pathname === url}>
         <Link href={url}>{conversation.name}</Link>
       </SidebarMenuButton>
-      <ConversationItemMenu />
+      <ConversationItemMenu
+        onDeleteConversation={() => onDeleteConversation(conversation.id)}
+      />
     </SidebarMenuItem>
   );
 }

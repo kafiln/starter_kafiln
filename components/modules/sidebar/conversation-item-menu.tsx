@@ -15,7 +15,13 @@ import {
   Trash2,
 } from "lucide-react";
 
-const ConversationItemMenu = () => {
+interface ConversationItemMenuProps {
+  onDeleteConversation: () => void;
+}
+
+const ConversationItemMenu = ({
+  onDeleteConversation,
+}: ConversationItemMenuProps) => {
   const isMobile = useIsMobile();
   return (
     <DropdownMenu>
@@ -44,7 +50,10 @@ const ConversationItemMenu = () => {
           <span>Open in New Tab</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive">
+        <DropdownMenuItem
+          className="text-destructive"
+          onClick={() => onDeleteConversation()}
+        >
           <Trash2 />
           <span>Delete</span>
         </DropdownMenuItem>

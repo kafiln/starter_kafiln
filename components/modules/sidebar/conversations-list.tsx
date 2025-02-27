@@ -13,6 +13,7 @@ interface ConversationsListProps {
   pathname: string;
   title?: string;
   onCreateConversation?: () => void;
+  onDeleteConversation?: () => void;
 }
 
 export function ConversationsList({
@@ -20,6 +21,9 @@ export function ConversationsList({
   pathname,
   title,
   onCreateConversation = () => {
+    console.log("create conversation");
+  },
+  onDeleteConversation = () => {
     console.log("create conversation");
   },
 }: ConversationsListProps) {
@@ -46,6 +50,7 @@ export function ConversationsList({
               key={conversation.id}
               conversation={conversation}
               pathname={pathname}
+              onDeleteConversation={onDeleteConversation}
             />
           ))}
         </SidebarMenu>

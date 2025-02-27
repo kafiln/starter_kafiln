@@ -1,6 +1,7 @@
 import { CONVERSATIONS, FOLDERS } from "@/constants/queryKeys";
 import {
   createConversation,
+  deleteConversation,
   fetchAllConversations,
 } from "@/lib/api/conversations";
 import { createFolder, fetchFolders } from "@/lib/api/folders";
@@ -40,11 +41,21 @@ export function useSidebarData() {
     },
   });
 
+  const { mutate: removeConversation } = useMutation({
+    mutationFn: (id: string): Promise<void> => deleteConversation(id),
+    onSuccess: () => {
+      client.invalidateQueries({
+        queryKey: [CONVERSATIONS],
+      });
+    },
+  });
+
   return {
     conversations,
     standaloneConversations,
     folders,
-    addNewConversation,
     addNewFolder,
+    addNewConversation,
+    removeConversation,
   };
 }

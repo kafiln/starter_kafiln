@@ -29,6 +29,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     folders,
     addNewConversation,
     addNewFolder,
+    removeConversation
   } = useSidebarData();
 
   return (
@@ -61,6 +62,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           conversations={standaloneConversations || []}
           pathname={pathname}
           onCreateConversation={addNewConversation}
+          onDeleteConversation={removeConversation}
         />
       </SidebarContent>
       <SidebarFooter>
