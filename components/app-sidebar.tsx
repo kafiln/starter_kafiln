@@ -3,7 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
-import { Logo } from "@/components/logo";
+import { LogoInMenu } from "@/components/logo";
 import { ConversationsList } from "@/components/modules/sidebar/conversations-list";
 import { FoldersList } from "@/components/modules/sidebar/folders-list";
 import { navigationItems } from "@/components/modules/sidebar/navigation-items";
@@ -34,7 +34,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <Logo />
+        <LogoInMenu />
         {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>

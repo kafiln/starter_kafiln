@@ -1,17 +1,17 @@
+import { Logo } from "@/components/logo";
 import FeatureCard from "@/components/templates/feature-card";
 import ScrollButton from "@/components/templates/scroll-button";
 import { ThemeToggle } from "@/components/theme-switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BarChart, Cpu, Database, Zap } from "lucide-react";
+import { BarChart, Database, Zap } from "lucide-react";
 import Link from "next/link";
 export default function RAGLandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center justify-center">
         <Link className="flex items-center justify-center" href="#">
-          <Cpu className="h-6 w-6" />
-          <span className="ml-2 text-2xl font-bold">RAGSolution</span>
+          <Logo />
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <ScrollButton name="Features" id="features" />
@@ -24,13 +24,14 @@ export default function RAGLandingPage() {
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
           <div className=" px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Supercharge Your AI with RAG
+                  Find What Matters – Instantly
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Enhance your AI applications with external knowledge using our
-                  Retrieval Augmented Generation solution.
+                  Meet Najm AI: the AI-powered entreprise search engine that
+                  transforms the way your teams discover, share, and act
+                  oncritical information.
                 </p>
               </div>
               <div className="space-x-4">
