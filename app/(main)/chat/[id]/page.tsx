@@ -1,15 +1,17 @@
 "use client";
 import LoadingSpinner from "@/components/loading-spinner";
+import { MessageInput } from "@/components/ui/message-input";
 import { MessageList } from "@/components/ui/message-list";
 import { CONVERSATIONS, MESSAGES } from "@/constants/queryKeys";
 import { getConversationByid } from "@/lib/api/conversations";
 import { fetchMessages } from "@/lib/api/messages";
-import { Message as MessageInput } from "@/lib/api/types";
+import { Message as MessageLocalInput } from "@/lib/api/types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export const mapInternalMessagesToMessages = (
-  messages: MessageInput[]
+  messages: MessageLocalInput[]
 ): { id: string; role: string; content: string; createdAt: Date }[] => {
   return messages.map((message) => {
     return {
@@ -22,6 +24,8 @@ export const mapInternalMessagesToMessages = (
 };
 
 export default function ChatPage() {
+  const [value, setValue] = useState("");
+
   const { id } = useParams<{ id: string }>();
 
   const { data: conversation } = useQuery({
@@ -37,7 +41,7 @@ export default function ChatPage() {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col space-y-2 px-2">
       <div className="flex-1 space-y-4 p-4 md:p-6">
         <div className="flex flex-col items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
@@ -52,6 +56,19 @@ export default function ChatPage() {
             )}
           </div>
         </div>
+      </div>
+      <div>
+        <MessageInput
+          value={value}
+          onChange={(event) => {
+            setValue(event.target.value);
+          }}
+          allowAttachments={false}
+          stop={() => {
+            console.log("Stoping ...");
+          }}
+          isGenerating={false}
+        />
       </div>
     </div>
   );
