@@ -95,7 +95,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   content,
   createdAt,
   showTimeStamp = false,
-  animation = "scale",
+  animation = "fade",
   actions,
   className,
   experimental_attachments,
@@ -115,7 +115,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
   const isUser = role === "user";
 
-  const formattedTime = createdAt?.toLocaleTimeString("en-US", {
+  const formattedTime = createdAt?.toLocaleTimeString("fr-FR", {
     hour: "2-digit",
     minute: "2-digit",
   });
