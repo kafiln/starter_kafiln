@@ -51,7 +51,9 @@ export function useSidebarData() {
   });
 
   return {
-    conversations,
+    conversations: conversations?.sort((a, b) =>
+      b.created_at.localeCompare(a.created_at)
+    ),
     standaloneConversations,
     folders,
     addNewFolder,
