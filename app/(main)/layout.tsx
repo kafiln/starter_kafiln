@@ -22,7 +22,9 @@ export default function RootLayout({
           <AppSidebar />
           <main className="flex flex-1 flex-col min-h-screen">
             <AppHeaderBar />
-            <div className="flex-1">{children}</div>
+            <div className="flex-1  dark:bg-zinc-800 border-red-600">
+              {children}
+            </div>
           </main>
         </SidebarProvider>
       </ThemeProvider>
