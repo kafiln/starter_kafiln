@@ -1,3 +1,4 @@
+import { PRODUCT_NAME } from "@/constants/names";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nextjs Starter by Kafiln",
-  description: "Next.js + TypeScript Starter by Kafiln",
+  title: `${PRODUCT_NAME}`,
+  description: "Your smart research assistant",
 };
 
 export default function RootLayout({

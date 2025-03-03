@@ -1,3 +1,4 @@
+import { Label } from "@/components/ui/label";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -49,7 +50,7 @@ export function FoldersList({
       {title && (
         <SidebarGroupLabel>
           <div className="flex justify-between w-full">
-            <h1 className="text-base font-semibold text-black">{title}</h1>
+            <Label>{title}</Label>
             <PlusIcon
               className="cursor-pointer"
               onClick={onCreateFolder}

@@ -3,6 +3,7 @@ import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { Conversation } from "@/lib/api/types";
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 interface ConversationItemProps {
   conversation: Conversation;
@@ -23,7 +24,10 @@ export function ConversationItem({
         <Link href={url}>{conversation.name}</Link>
       </SidebarMenuButton>
       <ConversationItemMenu
-        onDeleteConversation={() => onDeleteConversation(conversation.id)}
+        onDeleteConversation={() => {
+          onDeleteConversation(conversation.id);
+          redirect("/chat");
+        }}
       />
     </SidebarMenuItem>
   );

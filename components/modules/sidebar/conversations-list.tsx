@@ -5,6 +5,7 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import { Conversation } from "@/lib/api/types";
+import { Label } from "@radix-ui/react-dropdown-menu";
 import { PlusIcon } from "lucide-react";
 import { ConversationItem } from "./conversation-item";
 
@@ -34,7 +35,7 @@ export function ConversationsList({
       {title && (
         <SidebarGroupLabel>
           <div className="flex justify-between w-full">
-            <h1 className="text-base font-semibold text-black">{title}</h1>
+            <Label>{title}</Label>
             <PlusIcon
               className="cursor-pointer"
               onClick={onCreateConversation}

@@ -6,11 +6,12 @@ import { CONVERSATIONS, MESSAGES } from "@/constants/queryKeys";
 import { getConversationByid } from "@/lib/api/conversations";
 import { fetchMessages } from "@/lib/api/messages";
 import { Message as MessageLocalInput } from "@/lib/api/types";
+import { ChatMessageList } from "@/src/components/ui/chat/chat-message-list";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-export const mapInternalMessagesToMessages = (
+const mapInternalMessagesToMessages = (
   messages: MessageLocalInput[]
 ): { id: string; role: string; content: string; createdAt: Date }[] => {
   return messages.map((message) => {
@@ -47,18 +48,24 @@ export default function ChatPage() {
           <h2 className="text-2xl font-bold tracking-tight">
             {conversation?.name}
           </h2>
-          <div className="py-4">
-            {messages && messages.length > 0 && (
-              <MessageList
-                messages={mapInternalMessagesToMessages(messages)}
-                isTyping={false}
-              />
-            )}
-          </div>
+          <ChatMessageList>
+            <div className="py-4">
+              {messages && messages.length > 0 && (
+                <MessageList
+                  messages={mapInternalMessagesToMessages(messages)}
+                  isTyping={false}
+                />
+              )}
+            </div>
+          </ChatMessageList>
         </div>
       </div>
       <div>
         <MessageInput
+          submitOnEnter
+          onSubmit={(value) => {
+            console.log(value);
+          }}
           value={value}
           onChange={(event) => {
             setValue(event.target.value);
