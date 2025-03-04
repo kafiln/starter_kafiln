@@ -1,5 +1,5 @@
 import { NavItem } from "@/components/nav-main";
-import { Home, Settings, User } from "lucide-react";
+import { HelpCircle, Home, Settings, User } from "lucide-react";
 
 export const navigationItems: NavItem[] = [
   {
@@ -16,5 +16,10 @@ export const navigationItems: NavItem[] = [
     title: "Settings",
     url: "/chat/settings",
     icon: Settings,
+  },
+  {
+    title: "FAQ",
+    url: "/chat/faq",
+    icon: HelpCircle,
   },
 ];

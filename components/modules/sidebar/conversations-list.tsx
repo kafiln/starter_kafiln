@@ -1,3 +1,4 @@
+import { Label } from "@/components/ui/label";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -5,7 +6,6 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import { Conversation } from "@/lib/api/types";
-import { Label } from "@radix-ui/react-dropdown-menu";
 import { PlusIcon } from "lucide-react";
 import { ConversationItem } from "./conversation-item";
 
