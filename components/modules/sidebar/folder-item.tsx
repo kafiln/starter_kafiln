@@ -1,5 +1,11 @@
 import { ConversationsList } from "@/components/modules/sidebar/conversations-list";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -10,13 +16,21 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
-import { ChevronRight, FolderIcon } from "lucide-react";
+import {
+  ChevronRight,
+  FolderIcon,
+  MoreVertical,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 
 interface FolderItemProps {
   folder: Folder;
   conversations: Conversation[] | undefined;
   pathname: string;
   onConversationMoved?: () => void;
+  onFolderRename?: (id: string, name: string) => void;
+  onFolderDelete?: (id: string) => void;
 }
 
 const FolderItem = ({
@@ -24,6 +38,8 @@ const FolderItem = ({
   conversations,
   pathname,
   onConversationMoved,
+  onFolderRename,
+  onFolderDelete,
 }: FolderItemProps) => {
   const folderConversation = conversations?.filter(
     (c) => c.folder_id === folder.id
@@ -55,10 +71,38 @@ const FolderItem = ({
     >
       <CollapsibleTrigger asChild disabled={folderConversation?.length === 0}>
         <SidebarMenuButton tooltip={folder.name}>
-          <div className="flex items-center">
+          <div className="flex items-center w-full">
             <FolderIcon size={16} className="mr-2" />
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center justify-between w-full">
               <span>{folder.name}</span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="p-1 hover:bg-accent rounded-sm">
+                    <MoreVertical className="h-4 w-4" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onFolderRename?.(folder.id, folder.name);
+                    }}
+                  >
+                    <Pencil className="mr-2 h-4 w-4" />
+                    Rename
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onFolderDelete?.(folder.id);
+                    }}
+                    className="text-destructive focus:text-destructive"
+                  >
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               {/* <Badge
                 className="text-xs p-0 rounded-sm border"
                 variant={"secondary"}
