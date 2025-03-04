@@ -8,6 +8,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
 } from "@/components/ui/sidebar";
+import { updateConversation } from "@/lib/api/conversations";
 import { Conversation, Folder } from "@/lib/api/types";
 import {
   Collapsible,
@@ -24,6 +25,7 @@ interface FoldersListProps {
   pathname: string;
   title?: string;
   onCreateFolder: () => void;
+  onConversationMoved?: () => void;
 }
 
 export function FoldersList({
@@ -34,6 +36,7 @@ export function FoldersList({
   onCreateFolder = () => {
     console.log("create folder");
   },
+  onConversationMoved,
 }: FoldersListProps) {
   // State to track which folder is currently open
   const [openFolderId, setOpenFolderId] = useState<string | null>(null);
@@ -41,6 +44,26 @@ export function FoldersList({
   // Function to handle folder toggle
   const handleFolderToggle = (folderId: string, isOpen: boolean) => {
     setOpenFolderId(isOpen ? folderId : null);
+  };
+
+  const onDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const onDrop = async (e: React.DragEvent, folderId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const conversationId = e.dataTransfer.getData("conversationId");
+    if (!conversationId) return;
+
+    try {
+      await updateConversation(conversationId, { folder_id: folderId });
+      onConversationMoved?.();
+    } catch (error) {
+      console.error("Failed to move conversation:", error);
+    }
   };
 
   if (!folders || folders.length === 0) return null;
@@ -69,6 +92,8 @@ export function FoldersList({
               open={openFolderId === folder.id}
               onOpenChange={(isOpen) => handleFolderToggle(folder.id, isOpen)}
               className="group/collapsible"
+              onDragOver={onDragOver}
+              onDrop={(e) => onDrop(e, folder.id)}
             >
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>

@@ -17,10 +17,13 @@ import {
   SidebarGroupContent,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import { CONVERSATIONS } from "@/constants/queryKeys";
 import { useSidebarData } from "@/lib/hooks/use-sidebar-data";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const query = useQueryClient();
   const { user } = useUser();
   const {
     conversations,
@@ -55,6 +58,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           pathname={pathname}
           title="Folders"
           onCreateFolder={addNewFolder}
+          onConversationMoved={() =>
+            query.invalidateQueries({
+              queryKey: [CONVERSATIONS],
+            })
+          }
         />
         <ConversationsList
           title="Conversations"
@@ -62,6 +70,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           pathname={pathname}
           onCreateConversation={addNewConversation}
           onDeleteConversation={removeConversation}
+          onConversationMoved={() =>
+            query.invalidateQueries({
+              queryKey: [CONVERSATIONS],
+            })
+          }
         />
       </SidebarContent>
       <SidebarFooter>
