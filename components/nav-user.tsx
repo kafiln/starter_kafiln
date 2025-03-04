@@ -26,6 +26,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
 
 interface NavUserProps {
   name: string;
@@ -35,12 +36,17 @@ interface NavUserProps {
 export function NavUser({ user }: { user?: NavUserProps }) {
   const { isMobile } = useSidebar();
   const auth = useAuth();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const logout = () => {
     auth.signOut();
   };
 
-  if (!user) {
+  if (!user || !mounted) {
     return null;
   }
 
