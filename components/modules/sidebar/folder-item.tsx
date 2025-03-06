@@ -77,9 +77,9 @@ const FolderItem = ({
               <span>{folder.name}</span>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="p-1 hover:bg-accent rounded-sm">
+                  <div className="p-1 hover:bg-accent rounded-sm cursor-pointer">
                     <MoreVertical className="h-4 w-4" />
-                  </button>
+                  </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem
