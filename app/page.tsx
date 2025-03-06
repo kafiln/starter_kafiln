@@ -66,7 +66,7 @@ export default function RAGLandingPage() {
               </div>
               <div className="space-x-4">
                 <Button asChild>
-                  <Link href="/chat">Book a Demo</Link>
+                  <Link href="/demo">Book a Demo</Link>
                 </Button>
                 <Button variant="outline">Learn More</Button>
               </div>
@@ -260,7 +260,9 @@ export default function RAGLandingPage() {
                     placeholder="Enter your email"
                     type="email"
                   />
-                  <Button type="submit">Book a demo</Button>
+                  <Button asChild>
+                    <Link href="/demo">Book a Demo</Link>
+                  </Button>
                 </form>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   By signing up, you agree to our Terms of Service and Privacy
