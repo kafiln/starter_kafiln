@@ -23,6 +23,7 @@ import {
   Pencil,
   Trash2,
 } from "lucide-react";
+import { useCallback } from "react";
 
 interface FolderItemProps {
   folder: Folder;
@@ -44,12 +45,13 @@ const FolderItem = ({
   const folderConversation = conversations?.filter(
     (c) => c.folder_id === folder.id
   );
-  const onDragOver = (e: React.DragEvent) => {
+
+  const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-  };
+  }, []);
 
-  const onDrop = async (e: React.DragEvent, folderId: string) => {
+  const onDrop = useCallback(async (e: React.DragEvent, folderId: string) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -62,7 +64,7 @@ const FolderItem = ({
     } catch (error) {
       console.error("Failed to move conversation:", error);
     }
-  };
+  }, [onConversationMoved]);
 
   return (
     <SidebarMenuItem

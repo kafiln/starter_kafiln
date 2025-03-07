@@ -2,6 +2,7 @@
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import { useMemo } from "react";
 
 import { LogoInMenu } from "@/components/logo";
 import { ConversationsList } from "@/components/modules/sidebar/conversations-list";
@@ -34,6 +35,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     removeConversation,
   } = useSidebarData();
 
+  const navItems = useMemo(() => 
+    navigationItems.map((item) => ({
+      ...item,
+      isActive: item.url === pathname,
+    })), [pathname]);
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -43,12 +50,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <NavMain
-              items={navigationItems.map((item) => ({
-                ...item,
-                isActive: item.url === pathname,
-              }))}
-            />
+            <NavMain items={navItems} />
           </SidebarGroupContent>
         </SidebarGroup>
 
